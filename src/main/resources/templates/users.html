@@ -60,7 +60,7 @@
 			
 			<div th:each="account : ${user.accounts}">
 				<span>
-					<a th:href = "@{/users/{userId}/accounts/{accountId}(userId = ${user.userId}, accountId = ${account.accountId})}">
+					<a class="accountsLink" th:href = "@{/users/{userId}/accounts/{accountId}(userId = ${user.userId}, accountId = ${account.accountId})}">
 						[[${account.accountName}]]
 					</a>
 				</span>
