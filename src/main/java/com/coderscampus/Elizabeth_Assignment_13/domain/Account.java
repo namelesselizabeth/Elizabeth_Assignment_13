@@ -20,21 +20,21 @@ public class Account {
 	private String accountName;
 	private List<Transaction> transactions = new ArrayList<>();
 	private List<User> users = new ArrayList<>();
-	
+
 	@Id @GeneratedValue (strategy = GenerationType.IDENTITY)
 	public Long getAccountId() {
 		return accountId;
 	}
-	
+
 	public void setAccountId(Long accountId) {
 		this.accountId = accountId;
 	}
-	
+
 	@Column (length = 100)
 	public String getAccountName() {
 		return accountName;
 	}
-	
+
 	public void setAccountName(String accountName) {
 		this.accountName = accountName;
 	}
@@ -56,6 +56,6 @@ public class Account {
 	public void setUsers(List<User> users) {
 		this.users = users;
 	}
-	
-	
+
+
 }

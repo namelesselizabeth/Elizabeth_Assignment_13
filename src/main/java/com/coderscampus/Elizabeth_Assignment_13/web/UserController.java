@@ -17,7 +17,7 @@ import com.coderscampus.Elizabeth_Assignment_13.service.UserService;
 
 @Controller
 public class UserController {
-	
+
 	@Autowired
 	private UserService userService;
 	@Autowired
@@ -27,13 +27,13 @@ public class UserController {
 	public String getAllUsers(ModelMap model) {
 		Set<User> users = userService.findAll();
 		model.put("users", users);
-		
+
 		if(users.size() == 1) {
 			model.put("user", users);
 		}
 		return "users";
 	}
-	
+
 	@GetMapping("/users/{userId}")
 	public String getOneUser (ModelMap model, @PathVariable Long userId) {
 		User user = userService.findByIdWithAccounts(userId);
@@ -42,16 +42,16 @@ public class UserController {
 			address.setUser(user);
 			user.setAddress(address);
 			addressService.save(address);
-			
+
 		}
-		
+
 		userService.saveUser(user);
 		model.put("users", Arrays.asList(user));
 		model.put("user", user);
 		model.put("address", user.getAddress());
 		return "users";
 	}
-	
+
 	@PostMapping("/users/{userId}")
 	public String postOneUser (User user, Address address) {
 		user.setAddress(address);
@@ -66,24 +66,24 @@ public class UserController {
 		addressService.save(address);
 		return "redirect:/users/" + user.getUserId();
 	}
-	
+
 	@GetMapping("/register")
 	public String getCreateUser (ModelMap model) {
 		model.put("user", new User());
-		
+
 		return "register";
 	}
-	
+
 	@PostMapping("/register")
 	public String postCreateUser (User user) {
 		userService.saveUser(user);
 		return "redirect:/register";
 	}
-	
+
 	@PostMapping("users/{userId}/delete")
 	public String deleteOneUser (@PathVariable Long userId) {
 		userService.delete(userId);
 		return "redirect:/users";
 	}
-	
+
 }

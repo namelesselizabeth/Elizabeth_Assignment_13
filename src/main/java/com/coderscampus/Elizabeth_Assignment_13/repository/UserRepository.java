@@ -14,15 +14,15 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	List<User> findByUsername(String username);
 	List<User> findByName(String name);
 	List<User> findByNameAndUsername(String name, String username);
-	
+
 	@Query("select u from User u"
 			+ " left join fetch u.accounts"
 			+ " left join fetch u.address")
 		Set<User> findAllUsersWithAccountsAndAddresses();
-	
+
 	@Query("select u from User u where username = :username")
 	List<User> findExactlyOneUserByUsername(String username);
-	
+
 	@Query("select u from User u"
 			+ " left join fetch u.accounts"
 	        + " left join fetch u.address"

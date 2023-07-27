@@ -18,21 +18,21 @@ public class UserService {
 
 	@Autowired
 	private UserRepository userRepo;
-	
+
 	@Autowired
 	private AccountRepository accountRepo;
-	
+
 	public Set<User> findAll() {
 		return userRepo.findAllUsersWithAccountsAndAddresses();
 	}
-	
+
 	public User findById(Long userId) {
 		Optional<User> userOpt = userRepo.findById(userId);
 		return userOpt.orElse(new User());
 	}
-	
+
 	public User saveUser(User user) {
-		
+
 		if (user.getUserId() == null) {
 			Account checking = new Account();
 			checking.setAccountName("Checking Account");
@@ -40,7 +40,7 @@ public class UserService {
 			Account savings = new Account();
 			savings.setAccountName("Savings Account");
 			savings.getUsers().add(user);
-			
+
 			user.getAccounts().add(checking);
 			user.getAccounts().add(savings);
 			accountRepo.save(checking);
@@ -49,20 +49,20 @@ public class UserService {
 
 		return userRepo.save(user);
 	}
-	
+
 	public User saveUser(User user, Address address) {
 		return userRepo.save(user);
 	}
-		
+
 	public void delete(Long userId) {
 		userRepo.deleteById(userId);
 	}
-	
+
 	//Custom Queries with JPQL
 	public List<User> findByUsername(String username) {
 		return userRepo.findByUsername(username);
 	}
-	
+
 	public List<User> findByNameAndUsername(String name, String username) {
 		return userRepo.findByNameAndUsername(name, username);
 	}
