@@ -3,11 +3,18 @@
 
 	<head>
 		<title>Accounts</title>
+		<link rel="stylesheet" href="/users.css"/>
 	</head>
 	
 	<body>
 		<h1>[[${accounts.accountName}]]</h1>
-		
-	
+	    <form action="" method="post" id="accountsForm">
+	       <div>
+           Account Name: <input type="text" th:field="${accounts.accountName}" />
+           </div>
+           <input type="submit" value="Save Account"/>
+        </form>
+        <hr></hr>
+        <a class="back" th:href = "@{/users}">Back</a>
 	</body>
 </html>
