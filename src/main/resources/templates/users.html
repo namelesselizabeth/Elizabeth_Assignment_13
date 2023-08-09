@@ -25,25 +25,25 @@
 				<hr></hr>
 				
 				<div>
-					Address Line 1: <input type="text" th:field="${address.addressLine1}" placeholder="Street address, P.O box, company name..."/>
+					Address Line 1: <input type="text" th:field="${user.address.addressLine1}" placeholder="Street address, P.O box, company name..."/>
 				</div>
 				<div>
-					Address Line 2: <input type="text" th:field="${address.addressLine2}" placeholder="Apartment, suit, unit, building..."/>
+					Address Line 2: <input type="text" th:field="${user.address.addressLine2}" placeholder="Apartment, suit, unit, building..."/>
 				</div>
 				<div>
-					City: <input type="text" th:field="${address.city}" placeholder="City..."/>
+					City: <input type="text" th:field="${user.address.city}" placeholder="City..."/>
 				</div>
 				<div>
-					Region:  <input type="text" th:field="${address.region}" placeholder="State, province, region..."/>
+					Region:  <input type="text" th:field="${user.address.region}" placeholder="State, province, region..."/>
 				</div>
 				<div>
-					Country:  <input type="text" th:field="${address.country}" placeholder="Country..."/>
+					Country:  <input type="text" th:field="${user.address.country}" placeholder="Country..."/>
 				</div>
 				<div>
-					Zip Code: <input type="text" th:field="${address.zipcode}" placeholder="ZIP, postal code..."/>
+					Zip Code: <input type="text" th:field="${user.address.zipcode}" placeholder="ZIP, postal code..."/>
 				</div>
 
-				<input type="hidden" th:field="${address.userId}"/>
+				<input type="hidden" th:field="${user.address.userId}"/>
 				
 				<input type="submit" value="Update User Account" />
 				

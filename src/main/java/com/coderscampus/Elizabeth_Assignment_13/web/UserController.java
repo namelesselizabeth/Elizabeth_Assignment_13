@@ -28,8 +28,12 @@ public class UserController {
 		Set<User> users = userService.findAll();
 		model.put("users", users);
 
-		if(users.size() == 1) {
-			model.put("user", users);
+		if (!users.isEmpty()) {
+		    User user = users.stream().findFirst().get();
+		    if (user != null) {
+		        model.put("user", user);
+		    }
+		    
 		}
 		return "users";
 	}
