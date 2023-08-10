@@ -57,9 +57,11 @@ public class UserController {
 	}
 
 	@PostMapping("/users/{userId}")
-	public String postOneUser (User user, Address address) {
+	public String postOneUser (User user) {
+
+		Address address = addressService.save(user.getAddress());
 		user.setAddress(address);
-		address.setUser(user);
+		
 		if(user.getPassword().isBlank()) {
 			user.setPassword(userService.findById(user.getUserId()).getPassword());
 		}
