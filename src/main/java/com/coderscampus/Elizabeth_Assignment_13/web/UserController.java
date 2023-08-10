@@ -28,15 +28,21 @@ public class UserController {
 		Set<User> users = userService.findAll();
 		model.put("users", users);
 
-		if (!users.isEmpty()) {
+		if (users.size() > 1) {
+			return "users";
+		}
+		else if (!users.isEmpty()) {
 		    User user = users.stream().findFirst().get();
 		    if (user != null) {
 		        model.put("user", user);
+		        
 		    }
-		    
+		   return "redirect:/users/" + user.getUserId();
 		}
-		return "users";
+		return null;
+		
 	}
+		
 
 	@GetMapping("/users/{userId}")
 	public String getOneUser (ModelMap model, @PathVariable Long userId) {
@@ -44,6 +50,7 @@ public class UserController {
 		if(user.getAddress() == null) {
 			Address address = new Address();
 			address.setUser(user);
+			address.setUserId(userId);
 			user.setAddress(address);
 			addressService.save(address);
 
@@ -57,20 +64,20 @@ public class UserController {
 	}
 
 	@PostMapping("/users/{userId}")
-	public String postOneUser (User user) {
-
-		Address address = addressService.save(user.getAddress());
-		user.setAddress(address);
-		
+	public String postOneUser (@PathVariable Long userId, User user) {
 		if(user.getPassword().isBlank()) {
 			user.setPassword(userService.findById(user.getUserId()).getPassword());
 		}
 		if(userService.findByIdWithAccounts(user.getUserId()) != null) {
 			user.setAccounts(userService.findByIdWithAccounts(user.getUserId()).getAccounts());
 		}
+		
+		Address address = addressService.save(user.getAddress());
+		user.setAddress(address);
+		address.setUser(user);
+		
 		userService.saveUser(user);
-		addressService.save(address);
-		return "redirect:/users/" + user.getUserId();
+		return "redirect:/users/" + userId;
 	}
 
 	@GetMapping("/register")
